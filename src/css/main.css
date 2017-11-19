@@ -430,7 +430,8 @@ textarea {
   position: relative;
   width: 120px;
   -webkit-box-shadow: 0 0 0 4px #8be029;
-  box-shadow: 0 0 0 4px #8be029; }
+  box-shadow: 0 0 0 4px #8be029;
+  background-color: #eaeaea; }
   .DL__single[data-status="down"] {
     -webkit-box-shadow: 0 0 0 4px #e03c2e;
     box-shadow: 0 0 0 4px #e03c2e; }

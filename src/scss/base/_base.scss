@@ -15,8 +15,8 @@
             max-width: 100%;
             height: auto;
         }
-        
-        &.hasChildren{
+    
+        &.hasChildren {
             > .DL__single{
                 &:before {
                     z-index: 1;
@@ -79,6 +79,7 @@
         position: relative;
         width: $dl-boxwidth;
         box-shadow: 0 0 0 $dl-linewidth $color-green;
+        background-color: $light-gray;
         
         &[data-status="down"] {
             box-shadow: 0 0 0 $dl-linewidth $color-red;
