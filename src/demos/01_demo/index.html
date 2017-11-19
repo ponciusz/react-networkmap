@@ -14,6 +14,7 @@
 <div id="container"></div>
 
 
+
 <script type="text/babel">
 
     var DeviceList = React.createClass({
@@ -115,11 +116,24 @@
 
         },
 
+        updateName: function () {
+            console.log('Updating master');
 
-        dlMaster: function (image) {
+//            var masterArr = this.state.master;
+//            masterArr['name'] = 'test';
+//            this.setState({master: masterArr});
+
+
+            var devicesArr = this.state.devices;
+            devicesArr[0].device.name = 'Small';
+            this.setState({devices: devicesArr});
+
+        },
+
+        dlMaster: function () {
             return (
                     <div className="DL__master hasChildren">
-                        {this.dlSingle(this.state.master.name, this.state.master.image, this.state.master.status, this.state.master.ip)}
+                        <SingleDevice path="master.device" device={this.state.master} updateName={this.updateName} />
                     </div>
             )
         },
@@ -136,32 +150,10 @@
             }
             return (
                     <div className={"DL__group" + hasChildren}>
-                        {this.dlSingle(el.device.name, el.device.image, el.device.status, el.device.ip, el.device.speed)}
+                        <SingleDevice device={el.device} updateName={this.updateName}/>
                         {this.dlLoopChildren(el.device.children)}
                     </div>
             )
-        },
-
-        dlSingle: function (name = 'Name', image = 'https://dummyimage.com/200x200/e6e6e6/a6a6a6&text=image', status = 'up', ip = '0.0.0.0', speed) {
-            return (
-                    <div className="DL__single" data-status={status}>
-                        {this.dlSpeed(speed)}
-                        <div className="DL__single__name">{name}</div>
-                        <img className="DL__single__image" src={image} alt=""/>
-                        <div className="DL__single__ip">{ip}</div>
-                    </div>
-            );
-        },
-
-        dlSpeed: function (speed) {
-            if (speed) {
-                return (
-                        <div className="DL__single__speed">
-                            <div>Speed:</div>
-                            <div>{speed}</div>
-                        </div>
-                )
-            }
         },
 
         dlLoopChildren: function (children) {
@@ -182,6 +174,62 @@
         }
     });
 
+
+    var SingleDevice = React.createClass({
+
+        getInitialState: function () {
+            return {
+                name:   "PLA",
+                image:  "images/router1.jpg",
+                status: "up",
+                ip:     "34.54.22.44",
+                speed:  "100/100"
+            }
+        },
+
+        dlSpeed: function (speed) {
+            if (speed) {
+                return (
+                        <div className="DL__single__speed">
+                            <div>Speed:</div>
+                            <div>{speed}</div>
+                        </div>
+                )
+            }
+        },
+
+        saveName: function () {
+
+            console.log('Save: ' + this.refs.refName.innerText);
+            this.props.updateName();
+        },
+
+        dlDeleteDevice: function () {
+//            console.log('Delete');
+            console.log(this.refs.refName);
+//            var arr = this.state.devices;
+//            console.log(arr);
+//            this.setState({comments: arr})
+        },
+
+        render: function () {
+            return (
+                    <div ref="refSingle" className="DL__single" data-status={this.props.device.status}>
+                        {this.dlSpeed(this.props.device.speed)}
+                        <div ref="refName" className="DL__single__name">{this.props.device.name}</div>
+                        <img className="DL__single__image" src={this.props.device.image} alt=""/>
+                        <div className="DL__single__ip">{this.props.device.ip}</div>
+                        <div className="DL__single__actions">
+                            <button onClick={this.saveName}>
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(<DeviceList/>, document.getElementById('container'));
 
 
 
