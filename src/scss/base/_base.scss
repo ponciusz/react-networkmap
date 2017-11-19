@@ -110,9 +110,11 @@
         &__image{
             max-width: 100%;
             height: auto;
+            padding: 5px;
         }
         &__ip {
             text-align: center;
+            padding: 5px;
         }
         &:after {
             z-index: 1;

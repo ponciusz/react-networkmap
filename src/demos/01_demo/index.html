@@ -124,72 +124,9 @@
             )
         },
 
-        dlSpeed: function (speed) {
-            if (speed) {
-                return (
-                        <div className="DL__single__speed">
-                            <div>Speed:</div>
-                            <div>{speed}</div>
-                        </div>
-                )
-            }
-        },
-
-        dlSingle: function (name = 'Name', image = 'https://dummyimage.com/200x200/e6e6e6/a6a6a6&text=image', status = 'up', ip = '0.0.0.0', speed) {
-            return (
-                    <div className="DL__single" data-status={status}>
-                        {this.dlSpeed(speed)}
-                        <div className="DL__single__name">{name}</div>
-                        <img className="DL__single__image" src={image} alt=""/>
-                        <div className="DL__single__ip">{ip}</div>
-                    </div>
-            );
-        },
-
-        xdlGroup: function () {
-            return (
-                    <div className="DL__group hasChildren">
-                        {this.dlSingle('PLA1', 'https://dummyimage.com/200x200/e6e6e6/a6a6a6&text=PLA1')}
-                        <div className="DL__children">
-
-                            <div className="DL__group hasChildren">
-                                {this.dlSingle('PLA2', 'https://dummyimage.com/200x200/e6e6e6/a6a6a6&text=PLA2', 'up', '23.46.26.66', '256/256')}
-                                <div className="DL__children">
-                                    <div className="DL__group">
-                                        {this.dlSingle('PLA5', 'https://dummyimage.com/200x200/e6e6e6/a6a6a6&text=PLA5', 'down', '23.45.134.34')}
-                                    </div>
-                                    <div className="DL__group">
-                                        {this.dlSingle('PLA6', 'https://dummyimage.com/200x200/e6e6e6/a6a6a6&text=PLA6')}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="DL__group">
-                                {this.dlSingle('PLA3', 'https://dummyimage.com/200x200/e6e6e6/a6a6a6&text=PLA3')}
-                            </div>
-
-                            <div className="DL__group">
-                                {this.dlSingle('PLA4', 'https://dummyimage.com/200x200/e6e6e6/a6a6a6&text=PLA4')}
-                                <div className="DL__children">
-                                    <div className="DL__group">
-                                        {this.dlSingle('PLA6', 'https://dummyimage.com/200x200/e6e6e6/a6a6a6&text=PLA8')}
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-            );
-        },
-
-
         dlDevices: function () {
-
             return this.state.devices.map(this.dlRenderGroup);
-
         },
-
 
         dlRenderGroup: function (el, i) {
             var hasChildren = '';
@@ -205,13 +142,33 @@
             )
         },
 
-        dlLoopChildren: function (children) {
-            if(children){
-                return children.map(this.dlRenderGroup);
-            }
-
+        dlSingle: function (name = 'Name', image = 'https://dummyimage.com/200x200/e6e6e6/a6a6a6&text=image', status = 'up', ip = '0.0.0.0', speed) {
+            return (
+                    <div className="DL__single" data-status={status}>
+                        {this.dlSpeed(speed)}
+                        <div className="DL__single__name">{name}</div>
+                        <img className="DL__single__image" src={image} alt=""/>
+                        <div className="DL__single__ip">{ip}</div>
+                    </div>
+            );
         },
 
+        dlSpeed: function (speed) {
+            if (speed) {
+                return (
+                        <div className="DL__single__speed">
+                            <div>Speed:</div>
+                            <div>{speed}</div>
+                        </div>
+                )
+            }
+        },
+
+        dlLoopChildren: function (children) {
+            if (children) {
+                return children.map(this.dlRenderGroup);
+            }
+        },
 
         render: function () {
             return (
