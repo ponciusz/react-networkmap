@@ -1,0 +1,134 @@
+.DL {
+    &__wrap {
+        * {
+            box-sizing: border-box;
+        }
+        @include clearfix;
+        padding: $dl-linewidth;
+    }
+    
+    &__master {
+        width: 100%;
+        position: relative;
+    
+        &__image{
+            max-width: 100%;
+            height: auto;
+        }
+        
+        &.hasChildren{
+            > .DL__single{
+                &:before {
+                    z-index: 1;
+                    content: "";
+                    height: 10px;
+                    width: $dl-linewidth;
+                    position: absolute;
+                    left: ($dl-boxwidth/2)-($dl-linewidth/2);
+                    bottom: -(10 + $dl-linewidth);
+                    background-color: $color-green;
+                    display: block;
+                }
+            }
+        }
+    }
+    
+    &__group {
+        float: left;
+        position: relative;
+        margin-top: $dl-margintop;
+        padding-right: $dl-margin;
+        
+        &:before {
+            z-index: 2;
+            content: "";
+            height: $dl-linewidth;
+            width: 100%;
+            position: absolute;
+            left: ($dl-boxwidth/2)-($dl-linewidth/2);
+            top: -($dl-margintop - 10);
+            background-color: $color-green;
+            display: block;
+        }
+        
+        &:last-child {
+            padding-right: 0;
+            &:before {
+                width: 0;
+            }
+        }
+        
+        &.hasChildren {
+            > .DL__single{
+                &:before {
+                    z-index: 1;
+                    content: "";
+                    height: 10px;
+                    width: $dl-linewidth;
+                    position: absolute;
+                    left: ($dl-boxwidth/2)-($dl-linewidth/2);
+                    bottom: -(10 + $dl-linewidth);
+                    background-color: $color-green;
+                    display: block;
+                }
+            }
+        }
+        
+    }
+    &__single {
+        position: relative;
+        width: $dl-boxwidth;
+        box-shadow: 0 0 0 $dl-linewidth $color-green;
+        
+        &[data-status="down"] {
+            box-shadow: 0 0 0 $dl-linewidth $color-red;
+            &:after {
+                background-color: $color-red;
+            }
+        }
+        
+        &__speed {
+            background-color: whitesmoke;
+            width: 100px;
+            position: absolute;
+            top: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            text-align: center;
+            border: 1px solid #a0a0a0;
+            padding: 5px;
+        }
+        
+        &__name {
+            text-align: center;
+            padding: 5px;
+            font-weight: bolder;
+        }
+        
+        &__image{
+            max-width: 100%;
+            height: auto;
+        }
+        &__ip {
+            text-align: center;
+        }
+        &:after {
+            z-index: 1;
+            content: "";
+            height: $dl-margintop - 10;
+            width: $dl-linewidth;
+            position: absolute;
+            left: ($dl-boxwidth/2)-($dl-linewidth/2);
+            top: -($dl-margintop - 10);
+            background-color: $color-green;
+            display: block;
+        }
+    }
+    
+    &__children {
+        position: relative;
+        @include clearfix;
+    }
+    
+}
