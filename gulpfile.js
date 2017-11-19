@@ -33,17 +33,6 @@ var path = {
 };
 
 
-gulp.task('sass', function () {
-    return gulp.src('src/scss/**/*.scss')
-        .pipe(sass())
-        .pipe(gulp.dest('src/css'))
-});
-
-// gulp.task('default', function () {
-//     gulp.watch('src/scss/**/*.scss', ['sass']);
-// });
-
-
 // Compile Sass, Autoprefix and minify
 gulp.task('styles', function () {
     return gulp.src(path.styles.src + '*.scss')
